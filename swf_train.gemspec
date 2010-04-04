@@ -33,7 +33,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://github.com/zeke/swf_train}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{A simple and flexible Rails helper for embedding SWFs in your views.}
   s.test_files = [
     "spec/spec_helper.rb",
