@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "spec/swf_train_spec.rb",
+     "swf_train-0.0.0.gem",
      "swf_train.gemspec"
   ]
   s.homepage = %q{http://github.com/zeke/swf_train}
