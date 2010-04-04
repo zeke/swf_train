@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "swf_train"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = "A simple and flexible Rails helper for embedding SWFs in your views."
+    gem.description = "Requires jQuery and jQuery SWFObject."
     gem.email = "zeke@sikelianos.com"
     gem.homepage = "http://github.com/zeke/swf_train"
     gem.authors = ["Zeke Sikelianos"]
