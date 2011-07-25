@@ -1,9 +1,13 @@
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-require 'swf_train'
-require 'spec'
-require 'spec/autorun'
+require 'rubygems'
+require 'bundler/setup'
+require 'active_support/all' # to get methods like blank? and starts_with?
+require 'action_view'
+require 'swf_train' # and any other gems you need
 
-Spec::Runner.configure do |config|
-  
+include ActionView::Helpers
+include ActiveSupport
+include SwfTrain
+
+RSpec.configure do |config|
+  # some (optional) config here
 end

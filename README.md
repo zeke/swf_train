@@ -37,10 +37,10 @@ swf 'swf/foo.swf', :dom_id => 'custom_dom_dom_doobie', :create_dom_container => 
 
 See full auto-generated documentation at [rdoc.info/projects/zeke/swf_train](http://rdoc.info/projects/zeke/swf_train)
 
-Colophon
---------
+Tests
+-----
 
-- Gem built with [Jeweler](http://github.com/technicalpickles/jeweler)
+    bundle exec rake spec
 
 Copyright
 ---------

@@ -6,11 +6,12 @@ module SwfTrain
   # 
   #  swf 'foo.swf'
   #  swf 'foo.swf', :height => 50, :flashvars => {:a => 1, :b => 'two'}
+  #  swf 'foo.swf', :use_headjs => true # If you're using head.js (http://headjs.com)
   #
   # By default, a DOM container is generated, but if you don't want that just pass in your 
   # custom `dom_id` and set `create_dom_container` to false
   #  swf 'swf/foo.swf', :dom_id => 'dombo', :create_dom_container => false)
-  def swf(swf_file, *args)
+  def swf(swf_file, options={})
     options = {
       :swf => swf_file,
       :dom_id => filename_to_dom_id(swf_file),
@@ -20,10 +21,15 @@ module SwfTrain
       :wmode => "opaque",
       :allowScriptAccess => "sameDomain",
       :create_dom_container => true,
-    }.merge(args.extract_options!)
+    }.merge!(options)
   
     out = []
-  
+    
+    # Yank use_headjs boolean out of the options hash
+    # See http://headjs.com/
+    use_headjs = options.delete(:use_headjs)
+    ready_wrapper = use_headjs ? "head" : "$(document)"
+    
     # Yank dom_id out of the options hash
     dom_id = options.delete(:dom_id)
   
@@ -47,8 +53,10 @@ module SwfTrain
     embed = hash_to_key_value_string(options)
   
     # Spit it out!
-    out << content_tag(:script, "$(document).ready(function(){$('##{dom_id}').flash({#{embed}});});", :type => "text/javascript", :charset => "utf-8")
-    out.reverse.join("\n")
+    out << content_tag(:script, "#{ready_wrapper}.ready(function(){$('##{dom_id}').flash({#{embed}});});", :type => "text/javascript", :charset => "utf-8")
+    
+    out = out.reverse.join("\n")
+    out.respond_to?(:html_safe) ? out.html_safe : out
   end
 
   # Convert a string to dom-friendly format.
@@ -67,7 +75,7 @@ module SwfTrain
   def hash_to_key_value_string(hash)
     pairs = []
     hash.each_pair do |k,v|
-      v = "'#{v}'" unless k.to_s=='flashvars' || !v.to_s.match(/^[0-9]*\.[0-9]+|[0-9]+$/).nil?
+      v = "\"#{v}\"" unless k.to_s=='flashvars' || !v.to_s.match(/^[0-9]*\.[0-9]+|[0-9]+$/).nil?
       pairs << "#{k}:#{v}"
     end
     pairs.sort.join(", ")
