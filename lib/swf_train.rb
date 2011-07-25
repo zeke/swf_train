@@ -53,10 +53,9 @@ module SwfTrain
     embed = hash_to_key_value_string(options)
   
     # Spit it out!
-    out << content_tag(:script, "#{ready_wrapper}.ready(function(){$('##{dom_id}').flash({#{embed}});});", :type => "text/javascript", :charset => "utf-8")
+    out << content_tag(:script, "#{ready_wrapper}.ready(function(){$('##{dom_id}').flash({#{embed}});});".html_safe, :type => "text/javascript", :charset => "utf-8")
     
-    out = out.reverse.join("\n")
-    out.respond_to?(:html_safe) ? out.html_safe : out
+    out.reverse.join("\n").html_safe
   end
 
   # Convert a string to dom-friendly format.
@@ -75,10 +74,10 @@ module SwfTrain
   def hash_to_key_value_string(hash)
     pairs = []
     hash.each_pair do |k,v|
-      v = "\"#{v}\"" unless k.to_s=='flashvars' || !v.to_s.match(/^[0-9]*\.[0-9]+|[0-9]+$/).nil?
+      v = "\"#{v}\"" unless k.to_s=='flashvars' || !v.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/).nil?
       pairs << "#{k}:#{v}"
     end
-    pairs.sort.join(", ")
+    pairs.sort.join(", ").html_safe
   end
   
 end

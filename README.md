@@ -29,13 +29,27 @@ Passing in FlashVars is easy:
 swf 'swf/foo.swf', :flashvars => {:foo => 'chacha', :bar => 250}
 ```
       
-By default, a DOM element is automatically created based on a variation of the swf filename, but you can override it like so:
+By default, a DOM element is automatically created based on a variation of the swf filename, 
+but you can override it like so:
 
 ``` ruby
 swf 'swf/foo.swf', :dom_id => 'custom_dom_dom_doobie', :create_dom_container => false
 ```
 
+SWF Train provides built-in support for the awesome non-blocking [head.js](http://headjs.com/) library, 
+so you can use jQuery on the body of the page even though it is not included yet:
+
+``` ruby
+swf 'swf/foo.swf', :use_headjs => true
+```
+
 See full auto-generated documentation at [rdoc.info/projects/zeke/swf_train](http://rdoc.info/projects/zeke/swf_train)
+
+Compatibility
+-------------
+
+- v1.0+ requires Rails 3
+- v0.0.2 is compatible with Rails 2
 
 Tests
 -----
