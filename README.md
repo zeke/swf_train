@@ -40,7 +40,7 @@ See full auto-generated documentation at [rdoc.info/projects/zeke/swf_train](htt
 Colophon
 --------
 
-- Gem built with {Jeweler}[http://github.com/technicalpickles/jeweler]
+- Gem built with [Jeweler](http://github.com/technicalpickles/jeweler)
 
 Copyright
 ---------
